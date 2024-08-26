@@ -12,12 +12,12 @@
           <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
       </ul>
     </header>
-    <div>
+    <div class="categories-form">
       <form method="post" action="{% url 'categories-form' %}">
         {% csrf_token %}
         {{ form.as_p }}
       <label for="id_name">Nome</label>
-      <input type="text" name="name" maxlength="200" required>
+      <input type="text" name="name" maxlength="200" required id="id_name">
       <button type="submit">Salvar</button>
     </div>
 {% endblock %}

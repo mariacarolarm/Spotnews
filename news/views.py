@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from news.models import CategoryForm, News
+from news.models import Category, CategoryForm, News, NewsForm, User
 
 
 def index(request):
@@ -22,3 +22,17 @@ def new_category(request):
         form = CategoryForm()
         context = {'form': form}
         return render(request, 'categories_form.html', context)
+
+
+def new_news(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home-page')
+    else:
+        form = NewsForm()
+        users = User.objects.all()
+        categories = Category.objects.all()
+        return render(request, 'news_form.html',
+                      {'form': form, 'users': users, 'categories': categories})
