@@ -1,5 +1,22 @@
 from django.shortcuts import render, redirect
 from news.models import Category, CategoryForm, News, NewsForm, User
+from rest_framework import viewsets
+from news.serializers import CategorySerializer, NewsSerializer, UserSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
 
 
 def index(request):
